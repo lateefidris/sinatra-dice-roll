@@ -2,7 +2,16 @@
 
 require "sinatra"
 require "sinatra/reloader"
+require "better_errors"
+require "binding_of_caller"
 
+# Need this configuration for better errors
+use(BetterErrors::Middleware)
+BetterErrors.application_root = __dir__
+BetterErrors::Middleware.allow_ip!("0.0.0.0/0.0.0.0")
+
+
+=begin
 get '/' do
   "Hello World"
 end
@@ -14,6 +23,7 @@ end
 get("/giraffe") do
   "Hopefully this shows up without having to restart the server"
 end
+=end
 
 # DICE GAME
 
